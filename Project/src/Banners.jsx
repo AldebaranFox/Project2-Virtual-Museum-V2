@@ -35,7 +35,7 @@ function Banners (){
 
    return(
       <>
-         <div id="LBanner" ClassName="Banner"
+         <div id="LBanner" className="Banner"
          onClick={() => {
             navigate(`/IndividualPiece/${featuredPieces[0].id}`)}
          }
@@ -46,7 +46,7 @@ function Banners (){
             <img src={featuredPieces[0].img} alt="Img Unavailable"/>
          </div>
 
-         <div id="RBanner" ClassName="Banner"
+         <div id="RBanner" className="Banner"
          onClick={() => {
             navigate(`/IndividualPiece/${featuredPieces[0].id}`)}
          }

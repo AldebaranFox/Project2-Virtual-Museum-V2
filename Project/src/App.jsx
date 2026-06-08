@@ -19,7 +19,7 @@ function App() {
       <Banners />
       <Routes>
         <Route path="/" element={
-          <Home 
+          <Home
             departmentList={departmentList}
             setDepartmentList={setDepartmentList}
             imgToggle={imgToggle}

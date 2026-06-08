@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import './CSS/DepartmentView.css'
 
 function DepartmentView({departmentList, imgToggle}) {
    const { departmentId } = useParams()
    const [piecesList, setPiecesList] = useState([]);
+   const navigate = useNavigate();
 
    //Every 5s add 10 items
    useEffect(() => {
@@ -30,7 +31,9 @@ function DepartmentView({departmentList, imgToggle}) {
          <div id="piecesDiv">
             <ul id="piecesList">
                {piecesList.map((pieceInfo) => (
-                  <li key={pieceInfo.id}>
+                  <li key={pieceInfo.id} onClick={() => {
+                     navigate(`/IndividualPiece/${pieceInfo.id}`)}}
+                     style={{ cursor: 'pointer' }}>
                      <div className="pieceHeader">
                         <p className="pieceName">{pieceInfo.title}</p>
                         <p className="pieceAuthor">{pieceInfo.author}</p>
