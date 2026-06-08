@@ -7,12 +7,13 @@ function Header({ search, setSearch }) {
 
   const handleSearch = () => {
     setSearch(inputValue);
-    navigate('/');
+    navigate('');
   };
 
   return (
     <header id="header">
       <h1 id="welcome">Welcome to the Art Museum</h1>
+      <button onClick={() => navigate('/')}>Home</button>
       <input
         type="text"
         value={inputValue}

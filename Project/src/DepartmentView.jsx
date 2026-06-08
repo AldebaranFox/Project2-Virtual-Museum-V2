@@ -8,20 +8,12 @@ function DepartmentView({departmentList, imgToggle}) {
 
    //Every 5s add 10 items
    useEffect(() => {
-      setPiecesList([]);
-
       const timers = [];
 
       for (let i = 0; i < 6; i++) {
          const timer = setTimeout(() => {
-            getArtPieces(
-               10 * i,
-               10 * (i + 1),
-               departmentId,
-               imgToggle,
-               setPiecesList
-            );
-         }, i * 5000);
+            getArtPieces(10 * i, 10 * (i + 1), departmentId, imgToggle, setPiecesList);
+         }, i * 3000);
          timers.push(timer);
       }
       return () => timers.forEach(clearTimeout);
