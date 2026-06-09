@@ -11,7 +11,7 @@ function Home({ departmentList, setDepartmentList, imgToggle, setImgToggle}) {
    }, []);
 
    return (
-      <>
+      <div id="homeView">
          <div id="about">
             <p id="aboutText">
                This is a website that allows you to navigate a virtual art museum. With access to 19 individual departments where each will contain up to 15 distinct art pieces.
@@ -19,21 +19,22 @@ function Home({ departmentList, setDepartmentList, imgToggle, setImgToggle}) {
             </p>
          </div>
 
-         <div className="toggleContainer">
-            <label className="toggle">
-               <input
-                  type="checkbox"
-                  id="imgToggle"
-                  checked={imgToggle}
-                  onChange={() => setImgToggle(prev => !prev)}
-               />
-               <span className="slider"></span>
-            </label>
-            <span>Entries without images</span>
-         </div>
-
          <div id="departmentDiv">
             <p id="departmentTitle">Departments</p>
+
+            <div className="toggleContainer">
+               <label className="toggle">
+                  <input
+                     type="checkbox"
+                     id="imgToggle"
+                     checked={imgToggle}
+                     onChange={() => setImgToggle(prev => !prev)}
+                  />
+                  <span className="slider"></span>
+               </label>
+               <span>Entries without images</span>
+            </div>
+
             <br/>
             <ul id="departmentList">
                {departmentList.map((department) => (
@@ -50,7 +51,7 @@ function Home({ departmentList, setDepartmentList, imgToggle, setImgToggle}) {
                ))}
             </ul>
          </div>
-      </>
+      </div>
    )
 
 }

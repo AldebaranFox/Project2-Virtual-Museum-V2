@@ -9,6 +9,11 @@ body{
    padding: 20px;
 }
 
+#homeView {
+   position: relative;
+   z-index: 1;
+}
+
 #about{
    background-color: rgb(140, 93, 36);
    color: white;
@@ -16,8 +21,9 @@ body{
    padding: 20px;
    padding-bottom: 10px;
    padding-top: 10px;
-   width: 75%;
+   width: 100%;
    max-width: 900px;
+   box-sizing: border-box;
    margin-bottom: 10px;
    text-align: justify;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.748);
@@ -29,8 +35,9 @@ body{
 }
 
 #departmentDiv{
-   width: 80%;
+   width: 100%;
    max-width: 900px;
+   box-sizing: border-box;
 }
 
 #departmentTitle{

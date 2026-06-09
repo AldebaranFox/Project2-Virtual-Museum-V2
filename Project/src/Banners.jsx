@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
+import './CSS/Banner.css'
 
 function Banners (){
    const [featuredPieces, setFeaturedPieces] = useState([])
@@ -22,19 +23,23 @@ function Banners (){
    }, [location.pathname]);
 
    if (featuredPieces.length < 2) {
-      return <>
-         <div id="LBanner">
-            <h2>Loading...</h2>
-         </div>
+      return (
+         <div id="bannerContainer">
+            <div id="LBanner" className="Banner">
+               <h2>Featured Piece</h2>
+               <h3>Loading...</h3>
+            </div>
 
-         <div id="RBanner">
-            <h2>Loading...</h2>
+            <div id="RBanner" className="Banner">
+               <h2>Featured Piece</h2>
+               <h3>Loading...</h3>
+            </div>
          </div>
-      </>;
+      )
    }
 
    return(
-      <>
+      <div id="bannerContainer">
          <div id="LBanner" className="Banner"
          onClick={() => {
             navigate(`/IndividualPiece/${featuredPieces[0].id}`)}
@@ -56,7 +61,7 @@ function Banners (){
             <p>{featuredPieces[1].author}</p>
             <img src={featuredPieces[1].img} alt="Img Unavailable"/>
          </div>
-      </>
+      </div>
    )
 }
 

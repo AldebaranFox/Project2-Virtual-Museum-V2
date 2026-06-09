@@ -23,9 +23,9 @@ function DepartmentView({departmentList, imgToggle}) {
    const department = departmentList.find(department => department.departmentId === Number(departmentId));
 
    return (
-      <>
+      <div id="departmentView">
          <h2 id="departmentName">
-            Welcome to {department.displayName}
+            {department.displayName}
          </h2>
 
          <div id="piecesDiv">
@@ -50,7 +50,7 @@ function DepartmentView({departmentList, imgToggle}) {
                ))}
             </ul>
          </div>
-      </>
+      </div>
    )
 }
 

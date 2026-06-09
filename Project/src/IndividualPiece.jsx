@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import './CSS/IndividualPiece.css'
 
 function IndividualPiece(){
    const { pieceId } = useParams()
@@ -22,9 +23,12 @@ function IndividualPiece(){
          <div id="details">
             <h2>{pieceInfo.title}</h2>
             <h3>{pieceInfo.artistRole} {pieceInfo.artistDisplayName}</h3>
-            <p id="pieceDetails"></p>
-            <p id="authorDetails"></p>
-            <p id="contributionDetails"></p>
+         </div>
+         
+         <div id="info">
+            <p id="pieceDetails">{pieceInfo.objectName}, {pieceInfo.dimensions} made from {pieceInfo.medium}; in {pieceInfo.objectDate}, {pieceInfo.objectBeginDate}-{pieceInfo.objectEndDate}</p>
+            <p id="authorDetails">Artist Info: {pieceInfo.culture}, {pieceInfo.period}, {pieceInfo.artistDisplayBio}</p>
+            <p id="contributionDetails">Contributed: {pieceInfo.creditLine} to {pieceInfo.repository} in {pieceInfo.accessionYear}; {pieceInfo.objectURL}</p>
          </div>
 
          <div id="mainImg">
