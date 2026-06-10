@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Home({ departmentList, setDepartmentList, imgToggle, setImgToggle}) {
+function Home({ imgToggle, setImgToggle}) {
    const navigate = useNavigate();
+   const [departmentList, setDepartmentList] = useState([]);
 
    useEffect(() => {
       fetch(`https://collectionapi.metmuseum.org/public/collection/v1/departments`)
@@ -36,20 +37,24 @@ function Home({ departmentList, setDepartmentList, imgToggle, setImgToggle}) {
             </div>
 
             <br/>
-            <ul id="departmentList">
-               {departmentList.map((department) => (
-                  <li
-                     key={department.departmentId}
-                     className="DepartmentItem"
-                     onClick={() => {
-                        navigate(`/DepartmentView/${department.departmentId}`)}
-                     }
-                     style={{ cursor: 'pointer' }}
-                  >
-                     {department.displayName}
-                  </li>
-               ))}
-            </ul>
+            {departmentList.length === 0 ? (
+               <h2>Loading...</h2>
+            ) : (
+               <ul id="departmentList">
+                  {departmentList.map((department) => (
+                     <li
+                        key={department.departmentId}
+                        className="DepartmentItem"
+                        onClick={() => {
+                           navigate(`/DepartmentView/${department.departmentId}/${department.displayName}`)}
+                        }
+                        style={{ cursor: 'pointer' }}
+                     >
+                        {department.displayName}
+                     </li>
+                  ))}
+               </ul>
+            )}
          </div>
       </div>
    )

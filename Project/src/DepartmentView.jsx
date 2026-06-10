@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import './CSS/DepartmentView.css'
 
-function DepartmentView({departmentList, imgToggle}) {
-   const { departmentId } = useParams()
+function DepartmentView({imgToggle}) {
+   const { departmentId,departmentName } = useParams()
    const [piecesList, setPiecesList] = useState([]);
    const navigate = useNavigate();
 
@@ -20,35 +20,37 @@ function DepartmentView({departmentList, imgToggle}) {
       return () => timers.forEach(clearTimeout);
    }, [departmentId, imgToggle]);
 
-   const department = departmentList.find(department => department.departmentId === Number(departmentId));
-
    return (
       <div id="departmentView">
          <h2 id="departmentName">
-            {department.displayName}
+            {departmentName}
          </h2>
 
          <div id="piecesDiv">
-            <ul id="piecesList">
-               {piecesList.map((pieceInfo) => (
-                  <li key={pieceInfo.id} onClick={() => {
-                     navigate(`/IndividualPiece/${pieceInfo.id}`)}}
-                     style={{ cursor: 'pointer' }}>
-                     <div className="pieceHeader">
-                        <p className="pieceName">{pieceInfo.title}</p>
-                        <p className="pieceAuthor">{pieceInfo.author}</p>
-                     </div>
+            {piecesList === 0 ? (
+               <h2>Loading...</h2>
+            ) : (
+               <ul id="piecesList">
+                  {piecesList.map((pieceInfo) => (
+                     <li key={pieceInfo.id} onClick={() => {
+                        navigate(`/IndividualPiece/${pieceInfo.id}`)}}
+                        style={{ cursor: 'pointer' }}>
+                        <div className="pieceHeader">
+                           <p className="pieceName">{pieceInfo.title}</p>
+                           <p className="pieceAuthor">{pieceInfo.author}</p>
+                        </div>
 
-                     <div className="pieceImg">
-                        <img src={pieceInfo.img} alt="Image unavailable" />
-                     </div>
+                        <div className="pieceImg">
+                           <img src={pieceInfo.img} alt="Image unavailable" />
+                        </div>
 
-                     <div className="descriptionContainer">
-                        <p className="description">{pieceInfo.description}</p>
-                     </div>
-                  </li>
-               ))}
-            </ul>
+                        <div className="descriptionContainer">
+                           <p className="description">{pieceInfo.description}</p>
+                        </div>
+                     </li>
+                  ))}
+               </ul>
+            )}
          </div>
       </div>
    )

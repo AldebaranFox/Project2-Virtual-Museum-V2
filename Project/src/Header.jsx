@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CSS/Header.css'
 
-function Header({ search, setSearch }) {
+function Header() {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState(search);
+  const [searchKey, setSearchKey] = useState('');
 
   const handleSearch = () => {
-    setSearch(inputValue);
-    navigate('');
-  };
+    if(searchKey){
+      navigate(`/SearchResults/${searchKey}`)
+      setSearchKey('')
+    }
+  }
 
   return (
     <header id="header">
@@ -17,8 +19,8 @@ function Header({ search, setSearch }) {
       <button onClick={() => navigate('/')}>Home</button>
       <input
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        value={searchKey}
+        onChange={(e) => setSearchKey(e.target.value)}
         onKeyDown={(e) => {if (e.key === 'Enter') {
           handleSearch()};}}
       />
