@@ -8,7 +8,11 @@ function Home({ imgToggle, setImgToggle}) {
    useEffect(() => {
       fetch(`https://collectionapi.metmuseum.org/public/collection/v1/departments`)
          .then((res) => res.json())
-         .then((data) => setDepartmentList(data.departments));
+         .then((data) => setDepartmentList(data.departments))
+         .catch(err => {
+            console.error(`Failed to fetch object:`, err);
+            return null;
+         });
    }, []);
 
    return (
