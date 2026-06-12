@@ -7,30 +7,31 @@ function SearchResults (){
    const { searchKey } = useParams()
    const [idList, setIdList] = useState([])
    const [resultList, setResultList] = useState([])
-   const [loading, setLoading] = useState(false)
+   const [timedOut, setTimedOut] = useState(false)
    const cancelledRef = useRef(false);
 
    useEffect(() => {
-      setLoading(true);
       setIdList([]);
       setResultList([]);
       fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchKey}`)
          .then(res => res.json())
          .then(data => setIdList((data.objectIDs || []).slice(0, 60)))
-         .then(setLoading(false))
    }, [searchKey])
 
    useEffect(() => {
-      setLoading(true)
       cancelledRef.current = false;
-
       run(cancelledRef, idList, setResultList);
-
-      setLoading(false)
       return () => {
          cancelledRef.current = true;
       };
    }, [idList]);
+
+   useEffect(() => {
+      const timer = setTimeout(() => {
+         setTimedOut(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+   }, []);
 
    return(
       <div id="searchView">
@@ -41,11 +42,12 @@ function SearchResults (){
          </div>
 
          <div id="listContainer">
-            {loading ? (
-               <h2>Loading...</h2>
-            ) : idList.length === 0 ? (
-               <h2>No Results Found</h2>
-            ) : (
+            {idList.length === 0 ? (
+               timedOut ? (
+                  <h2>No Results Found</h2>
+               ) : (
+                  <h2>Loading...</h2>
+            )) : (
                <ul id="resultList">
                   {resultList.map(result => (
                      <li className="result" key={result.id} onClick={() => {
